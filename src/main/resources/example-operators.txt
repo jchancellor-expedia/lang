@@ -1,0 +1,6 @@
+for
+withResource
+asynchronous / F# let
+multiple return paths (file not found)
+switch
+builder pattern

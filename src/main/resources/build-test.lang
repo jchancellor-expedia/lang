@@ -1,0 +1,51 @@
+function more (a b) c
+    var c (less b a)
+
+function not (a) b
+    var b 1
+    if a
+        set b 0
+
+function equal (a b) c
+    var c 1
+    if (less a b)
+        set c 0
+    if (more a b)
+        set c 0
+
+composite cons (first rest)
+var empty 0
+function isEmpty (c) e
+    var e (same c empty)
+
+function range (max) r
+    var r empty
+    var i 0
+    while (diff max i)
+        cons i r r
+        sum i 1 i
+
+procedure printList (list)
+    while (not (isEmpty list))
+        print (first list)
+        rest list list
+
+function getPrimes (max) primes
+    var primes empty
+    var candidate 2
+    while (diff candidate max)
+        var isPrime 1
+        var somePrimes primes
+        while (not (isEmpty somePrimes))
+            if (equal (rem candidate (first somePrimes)) 0)
+              - set isPrime 0
+                set somePrimes empty
+              - rest somePrimes somePrimes
+        if isPrime
+            cons candidate primes primes
+        sum candidate 1 candidate
+
+# printList (range 10)
+# printList (getPrimes 100)
+print (getPrimes 100)
+print (range 5)

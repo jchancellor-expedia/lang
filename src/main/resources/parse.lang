@@ -1,0 +1,25 @@
+value true 1
+value false 0
+
+procedure not (a b)
+    nand a a b
+
+procedure and (a b c)
+    not (nand a b) c
+
+procedure or (a b c)
+    nand (not a) (not b) c
+
+procedure lessOrEqual (a b c)
+    less a b l
+    equal a b e
+    or l e c
+
+procedure more (a b c)
+    not (lessOrEqual a b) c
+
+procedure moreOrEqual (a b c)
+    not (less a b) c
+
+procedure notEqual (a b c)
+    not (equal a b) c

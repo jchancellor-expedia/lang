@@ -1,0 +1,58 @@
+op until (COND BODY) ENV
+    extend ENV EXT
+    eval COND ENV cond
+    while (not cond)
+        exec BODY EXT
+        eval COND ENV cond
+
+#op myOp ENV (NAME ENVPARAM PARAMS BODY)
+#    op name CALLENV CALLARGS
+#        extend ENV EXT
+#        <set> EXT PARAMS CALLARGS
+#        bind EXT ENVPARAM CALLENV
+#        exec EXT BODY
+#    bind ENV NAME name
+
+proc even (x y)
+    set y 0
+    branch (equal x 0)
+      - set y true
+      - not (even (diff x 1)) y
+
+op swap (A B) E
+    eval A E a
+    eval B E b
+    bind A E b
+    bind B E a
+
+#swap swap print
+#swap 555
+#print print swap
+#print 666
+
+op asList (NAME LIST) ENV
+    var result empty
+    var e empty
+    pempty LIST e
+    while (not e)
+        var item 0
+        pfirst LIST ITEM
+        eval ITEM ENV item
+        print item
+        cons item result result
+        prest LIST REST
+        set LIST REST
+        pempty LIST e
+    init NAME ENV (reverse result)
+
+#op asList (NAME LIST) ENV
+#    var result empty
+#    while (not (pempty LIST))
+#        var item (eval (pfirst LIST) ENV)
+#        cons item result result
+#        prest LIST LIST
+#    init NAME ENV (reverse result)
+
+asList fibs (1 1 2 3 5 8 13)
+for n fibs
+    print n

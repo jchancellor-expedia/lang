@@ -1,0 +1,87 @@
+operator for args env
+    tuple
+      declarator f
+      expression e
+      block f
+    e (f)
+  - unpack args (item list body)
+    evaluate list env (var l)
+    while (not (isEmpty l))
+        extend env ext
+        declare item ext (first l)
+        execute body ext
+        rest l l
+
+operator listLiteral args env
+    tuple
+      declarator e
+      sequence (expression e)
+    e
+  - unpack args (newList items)
+    var l empty
+    iterate item items
+        var i 0
+        evaluate item env i
+        cons i l l
+    declare newList env l
+
+operator swap args env
+    tuple (expression e) (expression e)
+    e
+  - unpack args (a b)
+    evaluate a env (var t)
+    evaluate b env (var u)
+    bind a env u
+    bind b env t
+
+operator until args env
+    tuple (expression e) (block f)
+    e (f)
+  - unpack args (condition body)
+    var continue 1
+    while continue
+        evaluate condition env continue
+        set continue (not continue)
+        if continue
+            extend env ext
+            execute body ext
+
+listLiteral nums (1 2 3)
+print nums
+for num nums
+    print num
+
+var a 1
+var b 2
+swap a b
+print a
+print b
+
+set a 5
+until (less a 0)
+    print a
+    diff a 1 a
+
+var mutable (cons 1 empty)
+print mutable
+set (first mutable) 5
+print mutable
+
+#operator proc opnds env
+#    tuple
+#      declarator e
+#      sequence (declarator f)
+#      block f
+#    e (f)
+#  - unpack opnds (name params body)
+#    operator f fArgs fEnv
+#        sequence (expression i)
+#        i
+#      - extend env envExt
+#        for i (range (size fArgs))
+#            item fArgs i fArg
+#            item params i param
+#            evaluate fArg fEnv t
+#            bind params envExt i t
+#        execute body envExt
+#    bind name env f

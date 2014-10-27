@@ -1,0 +1,66 @@
+procedure applyBinary (f a b c)
+    f a b c
+
+applyBinary sum 3 5 y
+print y
+
+procedure makeAdder (n a)
+    procedure a (m p)
+        sum n m p
+
+makeAdder 4 add4
+makeAdder 5 add5
+add4 4 u
+add5 5 v
+print u
+print v
+
+op until (COND BODY) ENV
+    eval COND ENV cond
+    while (not cond)
+        exec BODY ENV
+        eval COND ENV cond
+
+set h 0
+until (moreOrEqual h 10)
+    print h
+    sum h 1 h
+
+#op myOp ENV (NAME ENVPARAM PARAMS BODY)
+#    op name CALLENV CALLARGS
+#        extend ENV EXT
+#        <set> EXT PARAMS CALLARGS
+#        bind EXT ENVPARAM CALLENV
+#        exec EXT BODY
+#    bind ENV NAME name
+
+#    exec (first (rest (rest PARAM))) EXT
+
+for num nums2
+    print num
+
+for n (range 15)
+    print n
+
+procedure getPrimes (max primes)
+    set candidate 2
+    set primes empty
+    while (less candidate max)
+        set isPrime true
+        set r primes
+        while (and isPrime (not (isEmpty r)))
+            if (equal (rem candidate (first r)) 0)
+                set isPrime false
+            rest r r
+#        for prime (reverse primes)
+#            if (equal (rem candidate prime) 0)
+#                set isPrime false
+        if isPrime
+            reverse (cons candidate (reverse primes)) primes
+        sum candidate 1 candidate
+
+set p 0
+for p (getPrimes 100)
+    print p
+print p
+

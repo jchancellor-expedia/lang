@@ -1,0 +1,57 @@
+proc cons (a b c)
+    proc cc (f x)
+        f a b x
+    set c cc
+
+proc first (c y)
+    proc f (a b x)
+        set x a
+    c f y
+
+proc rest (c y)
+    proc f (a b x)
+        set x b
+    c f y
+
+proc empty (f y)
+    set y true
+
+proc isEmpty (l y)
+    proc f (a b x)
+        set x false
+    l f y
+
+proc range (n r)
+    set r empty
+    while (more n 0)
+        diff n 1 n
+        cons n r r
+
+op for (ITEM LIST BODY) ENV
+    var list empty
+    eval LIST ENV list
+    extend ENV EXT
+    init ITEM EXT 0
+    while (not (isEmpty list))
+        var item 0
+        first list item
+        assign ITEM EXT item
+        exec BODY EXT
+        rest list list
+
+proc reverse (l r)
+    set r empty
+    for i l
+        cons i r r
+
+var nums empty
+cons 2 nums nums
+cons 3 nums nums
+cons 5 nums nums
+
+reverse nums nums
+
+#set num 0
+for xx nums
+    print xx
+#print num
